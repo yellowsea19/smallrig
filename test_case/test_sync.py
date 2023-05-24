@@ -193,3 +193,4 @@ class Sync:
 if __name__ == '__main__':
     sync = Sync(env="test", order_number="221021071829458095")
     sync()
+    print("aaa")
