@@ -1,0 +1,40 @@
+
+#测试环境
+admin:
+  login_url: 'http://192.168.133.223:8888'
+  host: 'http://192.168.133.223:8555'
+  open_api_url: 'http://192.168.24.22:8879'
+pc:
+  loign_url: 'http://192.168.133.22:8003'
+  host: 'http://192.168.133.22:8002'
+
+
+#  #UAT环境
+#admin:
+#  login_url: 'https://sysmall.smallrig.net'
+#  host: 'https://bereal.smallrig.net'
+##  open_api_url: 'http://192.168.24.22:8879'
+#pc:
+#  loign_url: 'https://uat-login.smallrig.com'
+#  host: 'https://uat.smallrig.com/'
+
+
+
+mysql:
+#  #测试环境
+  host: '192.168.133.22'
+  user: 'root'
+  password: 'smallRig123!'
+  port: 3306
+  db: 'smallrig-mall-pay'
+
+#
+#  #UAT环境
+#  host: '54.242.90.217'
+#  user: 'root'
+#  password: 'TvNWEnPlZbdKMDK8a'
+#  port: 3306
+#  db: 'smallrig-mall-pay'
+
+
+
