@@ -168,7 +168,7 @@ class Sync:
         # # 订单文件解析
         # logger.info("文件解析")
         # self.do_job(cookie, self.file_parsing_id)
-        # time.sleep(60)
+
         logger.info("【订单同步】自建商城=》MySQL")
         self.do_job(cookie, self.push_mysql_zt_id)
         time.sleep(20)
