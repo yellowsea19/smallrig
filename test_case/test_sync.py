@@ -175,7 +175,6 @@ class Sync:
         # 后台登录业务中台
         token, userId = self.zt_login(self.env)
         # 业务中台查询订单
-
         order_id = self.get_zt_order_number(token, userId, order_number=self.order_number)
         logger.debug(order_id)
         if order_id == None:
