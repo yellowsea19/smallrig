@@ -1,0 +1,92 @@
+job_taobao_data = {
+    "title": "【订单拉取】淘宝订单拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=113&executorParam=%7B+%22status%22%3A%22SELLER_CONSIGNED_PART%2CWAIT_SELLER_SEND_GOODS%22%2C%0A+++++%22minuteConfig%22%3A%221440%22+%2C%0A++++%22url%22%3A%22http%3A%2F%2F39.98.37.249%3A3389%2FtaoBao%2Fv2%2Flist%22%0A%7D&addressList="
+    }
+job_taobao_addr = {
+    "title": "【订单拉取】淘宝订单地址拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=312&executorParam=&addressList="
+    }
+
+
+job_taobao_to_mysql = {
+    "title": "【订单拉取】淘宝订单地址拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=118&executorParam=&addressList="
+    }
+
+job_yicang_data = {
+    "title": "【审单】易仓异步审核订单&WMS",
+    "method": "post",
+    "path": "",
+    "data": "id=108&executorParam=&addressList="
+    }
+job_tmall_data = {
+    "title": "【天猫订单拉取】天猫订单列表获取",
+    "method": "post",
+    "path": "",
+    "data": "id=75&executorParam=%7B+%22status%22%3A%22SELLER_CONSIGNED_PART%2CWAIT_SELLER_SEND_GOODS%22%2C%0A+++++%22minuteConfig%22%3A%221440%22+%0A+++%0A%7D&addressList="
+    }
+
+
+job_tmall_addr = {
+    "title": "【天猫订单地址】天猫订单地址拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=74&executorParam=&addressList="
+    }
+
+
+job_tmall_to_mysql = {
+    "title": "【天猫订单地址】天猫订单地址拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=73&executorParam=&addressList="
+    }
+
+job_ks_addr = {
+    "title": "【订单拉取】快手订单数据解密",
+    "method": "post",
+    "path": "",
+    "data": "id=310&executorParam=&addressList="
+    }
+
+job_ks_data = {
+    "title": "【订单拉取】快手订单拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=227&executorParam=%7B%22beginTime%22%3A%222023-05-05+09%3A01%3A20%22%2C%22endTime%22%3A%222023-05-25+20%3A31%3A20%22%7D&addressList="
+    }
+
+job_ks_to_mysql = {
+    "title": "【订单同步】快手订单同步MySQL",
+    "method": "post",
+    "path": "",
+    "data": "id=228&executorParam=&addressList="
+    }
+
+
+job_douyin_data = {
+    "title": "【订单拉取】抖音订单拉取",
+    "method": "post",
+    "path": "",
+    "data": "id=164&executorParam=%7B%22url%22%3A%22https%3A%2F%2Fopenapi-fxg.jinritemai.com%22%2C%22minute%22%3A600%7D&addressList="
+    }
+
+job_douyin_addr = {
+    "title": "【订单拉取】抖音数据解密",
+    "method": "post",
+    "path": "",
+    "data": "id=165&executorParam=%7B%22url%22%3A%22https%3A%2F%2Fopenapi-fxg.jinritemai.com%22%7D&addressList="
+    }
+
+job_douyin_to_mysql = {
+    "title": "【抖音】订单同步到数据库",
+    "method": "post",
+    "path": "",
+    "data": "id=167&executorParam=&addressList="
+    }

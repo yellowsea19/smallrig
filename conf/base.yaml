@@ -4,6 +4,10 @@ admin:
   login_url: 'http://192.168.133.223:8888'
   host: 'http://192.168.133.223:8555'
   open_api_url: 'http://192.168.24.22:8879'
+  job_base_url: 'http://192.168.133.223:19010'
+  zt_admin_base_url: "http://192.168.133.223:8888"
+  zt_url: "http://192.168.133.223:5555"
+  zt_login_url: "http://192.168.133.223:8889"
 pc:
   loign_url: 'http://192.168.133.22:8003'
   host: 'http://192.168.133.22:8002'
