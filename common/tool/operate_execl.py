@@ -1,35 +1,34 @@
-import xlrd
-class ExcelUtil():
-    def __init__(self, excelPath, sheetName="Sheet1"):
-        self.data = xlrd.open_workbook(excelPath)
-        self.table = self.data.sheet_by_name(sheetName)
-        # 获取第一行作为key值
-        self.keys = self.table.row_values(0)
-        # 获取总行数
-        self.rowNum = self.table.nrows
-        # 获取总列数
-        self.colNum = self.table.ncols
+import openpyxl
 
-    def dict_data(self):
-        if self.rowNum <= 1:
-            print("总行数小于1")
-        else:
-            r = []
-            j = 1
-            for i in list(range(self.rowNum-1)):
-                s = {}
-                # 从第二行取对应values值
-                s['rowNum'] = i+2
-                values = self.table.row_values(j)
-                for x in list(range(self.colNum)):
-                    s[self.keys[x]] = values[x]
-                r.append(s)
-                j += 1
-            return r
+def read_excel_data(file_path):
+    """
+    读取指定路径下的 Excel 表格，将数据转换成字典并放入列表中
+    :param file_path: Excel 文件路径
+    :return: 转换后的数据列表
+    """
+    # 打开 Excel 文件
+    workbook = openpyxl.load_workbook(file_path)
 
-if __name__ == "__main__":
-    filepath = r"/test_case/前台类目.xls"
-    sheetName = "Sheet1"
-    data = ExcelUtil(filepath, sheetName)
-    a=data.dict_data()
-    print(a)
+    # 获取当前活跃的工作表（通常是第一个工作表）
+    worksheet = workbook.active
+
+    # 获取表格的行数和列数
+    row_count = worksheet.max_row
+    column_count = worksheet.max_column
+
+    # 获取表格的表头（即第一行数据），作为字典的 key
+    keys = [worksheet.cell(row=1, column=i).value for i in range(1, column_count + 1)]
+
+    # 读取表格的数据，转换成字典，并将字典放入列表中
+    data = []
+    for i in range(2, row_count + 1):
+        row_data = {}
+        for j in range(1, column_count + 1):
+            row_data[keys[j - 1]] = worksheet.cell(row=i, column=j).value
+        data.append(row_data)
+
+    return data
+
+
+data_list = read_excel_data(r"E:\imge\test.xlsx")
+print(data_list)
