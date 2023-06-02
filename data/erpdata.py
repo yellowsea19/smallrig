@@ -90,3 +90,50 @@ job_douyin_to_mysql = {
     "path": "",
     "data": "id=167&executorParam=&addressList="
     }
+
+job_jd_data ={
+    "title": "【订单拉取】京东订单列表获取",
+    "method": "post",
+    "path": "",
+    "data": "id=58&executorParam=1440&addressList="
+    }
+
+
+job_jd_to_mysql ={
+    "title": "【京东订单】京东订单插入MySQL",
+    "method": "post",
+    "path": "",
+    "data": "id=59&executorParam=&addressList="
+    }
+
+oms_audit_data = {
+    "title": "发货单审核",
+    "method": "post",
+    "path": "/API/oms/order/v1/audit",
+    "data": {"warehouseId":232,"logistics":"SFCRD","hasMagento":"false","showReceiverRegion":"false","expressType":"SFCRD","expressTypeName":"顺丰次日达","ids":[4124527],"timestamp":1685607067000}
+    }
+
+
+SellerSKU_save = {
+    "title": "SellerSKU映射关系",
+    "method": "post",
+    "path": "/API/sku/platform/v1/save",
+    "data": {"platformProduct":{"platformCode":"10024082682486","channelId":88,"sonAsin":"","operators":"","channel":"JD-CN-SmallRig影视器材"},"productRelationList":[{"productId":2066,"productCode":"1128","productName":"三脚架固定板","productNum":1}],"timestamp":1685611576000}
+    }
+
+
+
+update_sellerSkuMatch = {
+    "title": "发货单更新SellerSKU",
+    "method": "get",
+    "path": "/API/oms/order/v1/sellerSkuMatch",
+    "data": {"id":4124560}
+    }
+
+stockTaking_saveOrUpdate = {
+    "title": "创建盘盈盘亏单",
+    "method": "post",
+    "path": "/API/srm/stockTaking/v1/saveOrUpdate",
+    "data": {"id":"","warehouseType":0,"productTotalNum":10000,"productVarietyNum":1,"remark":"","stockType":7,"stockTakingAssignDetailList":[{"productId":2066,"productName":"三脚架固定板","productCode":"1128","stockType":7,"marketId":10,"channelId":88,"marketName":"China-Pro","channelName":"JD-CN-SmallRig影视器材","productNum":10000}],"warehouseId":103,"stockTakingDetailList":[{"productCode":"1128","productId":2066,"productName":"三脚架固定板","productNum":10000,"stockType":7,"waitAignedNum":0}],"timestamp":1685673682000}
+
+    }

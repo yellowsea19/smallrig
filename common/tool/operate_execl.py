@@ -29,6 +29,6 @@ def read_excel_data(file_path):
 
     return data
 
-
-data_list = read_excel_data(r"E:\imge\test.xlsx")
-print(data_list)
+if __name__ == "__main__" :
+    data_list = read_excel_data(r"E:\imge\test1.xlsx")
+    print(data_list)

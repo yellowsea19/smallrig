@@ -1,11 +1,11 @@
 import requests
 from common.base.handle_yaml import HandleYaml
-from data import admindata
+from data import admindata,erpdata
 import json,time
 from common.base.handle_mysql import HandleMysql
 import importlib,sys
 from logs.log import logger
-from common.tool.aes import *
+
 import urllib.parse
 import datetime
 importlib.reload(sys)
@@ -42,7 +42,7 @@ class Erp:
         return res.headers["Set-Cookie"]
 
 
-    def do_job(self, cookie, job_id,data):
+    def do_job(self, cookie,data):
         """执行定时任务
         """
         uri = "/smallrig-job-admin/jobinfo/trigger"
@@ -52,11 +52,11 @@ class Erp:
             "X-Requested-With": "XMLHttpRequest",
             "Cookie": cookie
         }
-        if data != None:
-
-            data = "id=%s&executorParam=%s&addressList=" % (job_id, data)
-        else:
-            data = "id=%s&addressList=" % job_id
+        # if data != None:
+        #
+        #     data = "id=%s&executorParam=%s&addressList=" % (job_id, data)
+        # else:
+        #     data = "id=%s&addressList=" % job_id
 
         res = requests.post(url=url, params=data, headers=headers)
 
@@ -113,7 +113,103 @@ class Erp:
         else:
             raise Exception
 
+    def oms_audit(self,token = None,userId = None ,warehouseId = 232,logistics = "SFCRD",expressType = "SFCRD" ,ids = 4124527):
+        """ERP审核发货单
+        """
+        self.get_data = erpdata.oms_audit_data
+        uri = self.get_data['path']
+        url = base_yaml.get_data("admin","zt_url") + uri
+        headers = {
+            "Content-Type": "application/json;charset=UTF-8",
+            "system-code": "ERP",
+            "Access-Token": token,
+            "User-Id": userId
+        }
 
+        data=self.get_data['data']
+        data["warehouseId"] = warehouseId
+        data["logistics"] = logistics
+        data["expressType"] = expressType
+        data["ids"] = [ids]
+        res = requests.post(url=url, data=json.dumps(data), headers=headers)
+        logger.debug("\n" + url + "\n" + str(headers) + "\n" + str(data) + "\n" + res.text + "\n")
+        if res.json()["data"]["errorList"] == []  :
+            pass
+        else:
+            raise ValueError(res.json()["data"]["errorList"])
+
+
+    def SellerSKU_save(self,token ,userId ,platformCode,channelId,channel):
+        """新增SellerSKU映射关系
+        """
+        self.get_data = erpdata.SellerSKU_save
+        uri = self.get_data['path']
+        url = base_yaml.get_data("admin","zt_url") + uri
+        headers = {
+            "Content-Type": "application/json;charset=UTF-8",
+            "system-code": "ERP",
+            "Access-Token": token,
+            "User-Id": userId
+        }
+
+        data=self.get_data['data']
+        data["platformProduct"]["platformCode"] = platformCode
+        data["platformProduct"]["channelId"] = channelId
+        data["platformProduct"]["channel"] = channel
+        res = requests.post(url=url, data=json.dumps(data), headers=headers)
+        logger.debug("\n" + url + "\n" + str(headers) + "\n" + str(data) + "\n" + res.text + "\n")
+        if res.json()["code"] == 10000  :
+            pass
+        else:
+            raise ValueError(res.json()["message"])
+
+
+    def update_sellerSkuMatch(self,token ,userId ,id):
+        """发货单更新SellerSKU
+        """
+        self.get_data = erpdata.update_sellerSkuMatch
+        uri = self.get_data['path']
+        url = base_yaml.get_data("admin","zt_url") + uri
+        headers = {
+            "Content-Type": "application/json;charset=UTF-8",
+            "system-code": "ERP",
+            "Access-Token": token,
+            "User-Id": userId
+        }
+
+        data=self.get_data['data']
+        data["id"] = id
+        res = requests.get(url=url, params=data, headers=headers)
+        logger.debug("\n" + url + "\n" + str(headers) + "\n" + str(data) + "\n" + res.text + "\n")
+        if res.json()["code"] == 10000  :
+            pass
+        else:
+            raise ValueError(res.json()["message"])
+
+
+    def stockTaking_saveOrUpdate(self,token ,userId ,warehouseId,marketId,channelId):
+        """创建盘盈盘亏单
+        """
+        self.get_data = erpdata.stockTaking_saveOrUpdate
+        uri = self.get_data['path']
+        url = base_yaml.get_data("admin","zt_url") + uri
+        headers = {
+            "Content-Type": "application/json;charset=UTF-8",
+            "system-code": "ERP",
+            "Access-Token": token,
+            "User-Id": userId
+        }
+
+        data=self.get_data['data']
+        data["warehouseId"] = warehouseId
+        data["marketId"] = marketId
+        data["channelId"] = channelId
+        res = requests.post(url=url, data=json.dumps(data), headers=headers)
+        logger.debug("\n" + url + "\n" + str(headers) + "\n" + str(data) + "\n" + res.text + "\n")
+        if res.json()["code"] == 10000  :
+            pass
+        else:
+            raise ValueError(res.json()["message"])
 
 
 if __name__ == "main":
