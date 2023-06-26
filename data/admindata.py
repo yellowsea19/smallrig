@@ -163,3 +163,18 @@ cancel_order = {
     "data":{"orderNo":"230407073148726348","reason":"not_needed","remark":""}
 
 }
+
+confirmThePayment = {
+    "title": "线下付款确认收款",
+    "method": "post",
+    "path": "/API/orderPay/orderPay/confirmThePayment",
+    "data":{"actualPayCurrency":"USD","id":"1673150187113721857","payFlowNo":"123456","payTime":"2023-06-26 10:04:58","remark":"线下付款自动化下单"}
+
+}
+
+queryOrderPayPage = {
+    "title": "查询付款单列表",
+    "method": "post",
+    "path": "/API/orderPay/orderPay/queryOrderPayPage",
+    "data":{"pageNum":1,"pageSize":10,"orderNo":"230626021325280903"}
+}

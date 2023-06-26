@@ -134,9 +134,9 @@ class Erp:
         res = requests.post(url=url, data=json.dumps(data), headers=headers)
         logger.debug("\n" + url + "\n" + str(headers) + "\n" + str(data) + "\n" + res.text + "\n")
         if res.json()["data"]["errorList"] == []  :
-            pass
+            return "success"
         else:
-            raise ValueError(res.json()["data"]["errorList"])
+            return res.json()["data"]["errorList"]
 
 
     def SellerSKU_save(self,token ,userId ,platformCode,channelId,channel):
@@ -212,5 +212,8 @@ class Erp:
             raise ValueError(res.json()["message"])
 
 
-if __name__ == "main":
-    Erp().get_job_cookie()
+if __name__ == "__main__":
+    print("start")
+    cookie=Erp().get_job_cookie()
+    for i in range(5):
+        Erp().do_job(cookie,data="id=495&executorParam=&addressList=")

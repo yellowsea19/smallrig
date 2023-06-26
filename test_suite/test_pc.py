@@ -73,7 +73,7 @@ class PC:
         return response
 
 
-    def submitOrder(self,token,userId,submitOrderSkus,noSubmit=True,masterOrderNo="",orderActualMoney="" ):
+    def submitOrder(self,token,userId,submitOrderSkus,noSubmit=True,masterOrderNo="",deductBalance=0,orderActualMoney=0,payWay=1 ):
         """下单，（余额）
         """
         self.get_data = pcdata.submitOrder
@@ -85,22 +85,25 @@ class PC:
                     "System-Port": "1",
                     "Flow-Sourcet": "0",
                     "Accept-Language": "en_US",
-                    "Site-Code": "en_US"
+                    "Site-Code": "en_US",
+                    # "x-Forwarded-For": "69.212.22.214"
                 }
         self.data = self.get_data["data"]
         self.data["noSubmit"] = noSubmit
         self.data["submitOrderSkus"] = submitOrderSkus
+
         if masterOrderNo != "":
             self.data["masterOrderNo"]=masterOrderNo
-            self.data["orderActualMoney"]=0
-            self.data["payWay"] = 1
-            self.data["deductBalance"] = orderActualMoney
+            self.data["payWay"] = payWay
+            self.data["orderActualMoney"] = orderActualMoney
+            self.data["deductBalance"] = deductBalance
+
         request = requests.post(url = self.url,headers = self.headers,data = json.dumps(self.data))
 
         logger.debug(self.url)
         logger.info("请求参数：{0}\n响应：{1}".format(json.dumps(self.data,ensure_ascii=False), request.text))
         response = request.json()
-        if noSubmit != "" :
+        if noSubmit == True :
             return response["data"]["masterOrderNo"],response["data"]["orderActualMoney"]
         else:
             return response["data"]["orderNos"]

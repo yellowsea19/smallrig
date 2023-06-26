@@ -501,12 +501,53 @@ class Admin:
         res = res.json()
         return res
 
+    def query_order_pay(self,token,userId,orderNo):
+        """后台线下确认收款
+        """
+        self.get_data = admindata.queryOrderPayPage
+        self.url = base_yaml.get_data("admin", "host") + self.get_data["path"]
+        self.headers = {
+            "Access-Token": token,
+            "Content-Type": "application/json;charset=UTF-8",
+            "User-Id": userId,
+            "Accept-Language": "zh_CN"
+        }
+        self.data = self.get_data["data"]
+        self.data["orderNo"] = orderNo
+        logger.debug(self.url)
+        logger.debug(self.headers)
+        logger.debug(self.data)
+        res = requests.post(url=self.url, data=json.dumps(self.data), headers=self.headers)
+        logger.debug(res.text)
+        res = res.json()
+        logger.debug(res['data']['records'][0]['id'])
+        return res['data']['records'][0]['id']
 
+    def confirm_payment(self,token,userId,id):
+        """后台线下确认收款
+        """
+        self.get_data = admindata.confirmThePayment
+        self.url = base_yaml.get_data("admin", "host") + self.get_data["path"]
+        self.headers = {
+            "Access-Token": token,
+            "Content-Type": "application/json;charset=UTF-8",
+            "User-Id": userId,
+            "Accept-Language": "zh_CN"
+        }
+        self.data = self.get_data["data"]
+        self.data["id"] = id
+        logger.debug(self.url)
+        logger.debug(self.headers)
+        logger.debug(self.data)
+        res = requests.post(url=self.url, data=json.dumps(self.data), headers=self.headers)
+        logger.debug(res.text)
+        res = res.json()
+        return res
 
 
 if __name__ == '__main__':
     admin = Admin()
-    token,userId = admin.adminLogin(username="huanghai",password="17f711ffa7869410fbb8edfcb5f08167")
+    token,userId = admin.adminLogin(username="huanghai",password="dad9e82a80a5f8f6dd71d9375814f620")
     # couponName ="满10-1 002"
     # #保存优惠券
     # # admin.saveCouponInfo(token,userId,couponName,couponRule=0,satisfyMoney=10000,deductionMoney=8000)
@@ -522,8 +563,9 @@ if __name__ == '__main__':
     # admin.generateCouponCodes(token,userId,coupon_id,account,memberId)
     # #根据用户查询券码
     # admin.queryCouponCodes(token,userId,account,coupon_id)
-    admin.productListPage(token,userId,3667)
-
+    # admin.productListPage(token,userId,3667)
+    admin.query_order_pay(token,userId,230626021325280903)
+    admin.confirm_payment(token,userId,1673152463085678593)
 
 
 

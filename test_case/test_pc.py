@@ -20,7 +20,7 @@ class Testwork(unittest.TestCase):
         print('start {}'.format(self))
         # token, userId = PC().pcLogin(username='446941810@qq.com', password='a123456')
 
-    def test_order_01(self, sku_list = [(3667, 1)]):
+    def test_order_01(self, sku_list = [(4002, 1)]):
         """PC端0元下单（余额支付）
         """
         submitOrderSkus = []
@@ -30,9 +30,27 @@ class Testwork(unittest.TestCase):
         token, userId = PC().pcLogin(username="314221719@qq.com", password="a123456")
         masterOrderNo, orderActualMoney = PC().submitOrder(token=token, userId=userId, noSubmit=True,
                                                            submitOrderSkus=submitOrderSkus)
-        PC().submitOrder(token=token, userId=userId, noSubmit=False, masterOrderNo=masterOrderNo,
-                         orderActualMoney=orderActualMoney, submitOrderSkus=submitOrderSkus)
+        PC().submitOrder(token=token, userId=userId, noSubmit=False, masterOrderNo=masterOrderNo,deductBalance=orderActualMoney,
+                          submitOrderSkus=submitOrderSkus)
 
+    def test_order_02(self, sku_list = [(3667, 1)]):
+        """PC端线下付款下单，后台确认收款
+        """
+        submitOrderSkus = []
+        for i in sku_list:
+            tmp_dict = {'num': i[1], 'skuId': PC().getProductId(i[0]), 'orderSkuType': 0, 'thirdpartySkuCode': i[0]}
+            submitOrderSkus.append(tmp_dict)
+        token, userId = PC().pcLogin(username="314221719@qq.com", password="a123456")
+        masterOrderNo, orderActualMoney = PC().submitOrder(token=token, userId=userId, noSubmit=True,
+                                                           submitOrderSkus=submitOrderSkus)
+        orderNo = PC().submitOrder(token=token, userId=userId, noSubmit=False, masterOrderNo=masterOrderNo,
+                         orderActualMoney=orderActualMoney, submitOrderSkus=submitOrderSkus,payWay=3)
+        #登录后台，确认收款
+        admin = Admin()
+        token, userId = admin.adminLogin(username="huanghai", password="dad9e82a80a5f8f6dd71d9375814f620")
+        time.sleep(3)
+        pay_id = admin.query_order_pay(token, userId, orderNo)
+        admin.confirm_payment(token, userId, pay_id)
     def test_createQuestion(self, productCode="4002"):
         """创建你问我答
         """
