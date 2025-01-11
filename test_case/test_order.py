@@ -124,23 +124,6 @@ class Order(unittest.TestCase):
         log.debug(res.text)
         return res.json()['data']['orderNo']
 
-    # def test_0319001(self,channelName='Aliexpress-CN-CF速卖通',product_list=['1112','1128']):
-    #     res= self.get_market_channel_byId()
-    #     for i in res['data']:
-    #         if i['mcName'] ==channelName:
-    #             marketId = i['parentId']
-    #             channelId = i['id']
-    #     product_data_list = []
-    #     product_item_data_list = []
-    #     for productCode in product_list:
-    #         product_info = self.test_get_product_new(marketId=marketId,channelId=channelId,productCode=productCode)
-    #         print(product_info)
-    #         product_data = {"productCode":product_info['productCode'],"productId":product_info['productId'],"productStatusName":product_info['productStatusName'],"productStatusId":product_info['productStatusId'],"weight":12,"productName":product_info['productName'],"selectNum":0,"newSelectNum":1,"scale":1,"externalSku":product_info['productCode'],"orderQuantity":2,"productCodeSys":product_info['productCode'],"productNameSys":product_info['productName'],"saleOrderSysItems":[{"orderQuantity":2,"feeRatio":1,"productCode":product_info['productCode'],"productId":product_info['productId'],"productName":product_info['productName'],"productStatusId":product_info['productStatusId'],"productStatusName":product_info['productStatusName'],"scale":1,"weight":12}],"length":1,"price":"2.000","allPrice":"4.000","unitProductPrice":2,"productQuantity":1,"orderSnSource":"","sourceCode":""}
-    #         product_data_list.append(product_data)
-    #         product_item_data = {"productCode":product_info['productCode'],"productId":product_info['productId'],"productStatusName":product_info['productStatusName'],"productStatusId":product_info['productStatusId'],"weight":12,"productName":product_info['productName'],"selectNum":0,"newSelectNum":1,"scale":1,"externalSku":product_info['productCode'],"orderQuantity":2,"productCodeSys":product_info['productCode'],"productNameSys":product_info['productName'],"saleOrderSysItems":[{"orderQuantity":2,"feeRatio":1,"productCode":product_info['productCode'],"productId":product_info['productId'],"productName":product_info['productName'],"productStatusId":product_info['productStatusId'],"productStatusName":product_info['productStatusName'],"scale":1,"weight":12}],"length":1,"price":"2.000","allPrice":"4.000","unitProductPrice":2,"productQuantity":1,"orderSnSource":"","sourceCode":""}
-    #         product_item_data_list.append(product_item_data)
-    #     print(product_data_list)
-    #     print(product_item_data_list)
 
     def get_order_id(self,orderNo,orderStatus=None):
         '''订单列表-获取数据id'''
