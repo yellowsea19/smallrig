@@ -58,7 +58,7 @@ class Testwork(unittest.TestCase):
             print(result)
             print("----------------------------------------")
 
-    # Erp().do_job(cookie=cookie,data=job_yicang_data)
+    Erp().do_job(cookie=cookie,data=job_yicang_data)
 
     # SellerSKU映射关系
     # Erp().SellerSKU_save(token = token,userId = userId,platformCode = "1002408268245537",channelId=88,channel="JD-CN-SmallRig影视器材")

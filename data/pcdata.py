@@ -49,7 +49,7 @@ memberLogin_register={
     "title": "PC注册",
     "method": "post",
     "path": "/api/memberLogin/register",
-    "data":{"account":"auto001@qq.com","passwd":"a123456","subscribe":1}
+    "data":{"account":"314221719@qq.com","passwd":"a123456","subscribe":1,"inviteCode":"U76BBI"}
     }
 
 joinShoppingCart={

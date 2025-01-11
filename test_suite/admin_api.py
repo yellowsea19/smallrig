@@ -404,7 +404,7 @@ class Admin:
         logger.debug("请求参数：{0}\n响应：{1}".format(json.dumps(self.data), response))
         return response
 
-    def productListPage(self,token,userId,thirdpartySkuCode):
+    def productListPage(self,token,userId,thirdpartySkuCode,siteCode="en_US"):
         """查询商品信息
         """
         self.get_data = admindata.product_listPage
@@ -417,6 +417,7 @@ class Admin:
                 }
         self.data = self.get_data["data"]
         self.data["thirdpartySkuCode"]=str(thirdpartySkuCode)
+        self.data["siteCode"]=siteCode
         logger.debug(self.url)
         logger.debug(self.headers)
         request = requests.post(url = self.url,data = json.dumps(self.data),headers = self.headers)

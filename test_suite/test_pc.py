@@ -34,15 +34,19 @@ class PC:
         print("请求参数：{0}\n响应：{1}".format(self.data, response))
         return response['data']['token'], response['data']['userId']
 
-    def register(self,account=None,password=None):
+    def register(self,account=None,password=None,siteCode="en_US",inviteCode=""):
         """PC注册接口
         """
         self.get_data = pcdata.memberLogin_register
         self.url = base_yaml.get_data("pc","loign_url") + self.get_data["path"]
-        self.headers = {"Content-Type": "application/json"}
+        self.headers = {"Content-Type": "application/json",
+                        "Site-Code": siteCode,
+                        "System-Port": "0"
+                        }
         self.data = self.get_data["data"]
         self.data['account'] = account
         self.data['passwd'] = password
+        self.data['inviteCode'] = inviteCode
         request = requests.post(url = self.url,headers = self.headers,data = json.dumps(self.data))
         response = request.json()
         print(self.url)
@@ -73,8 +77,8 @@ class PC:
         return response
 
 
-    def submitOrder(self,token,userId,submitOrderSkus,noSubmit=True,masterOrderNo="",deductBalance=0,orderActualMoney=0,payWay=1 ):
-        """下单，（余额）
+    def submitOrder(self,token,userId,submitOrderSkus,noSubmit=True,masterOrderNo="",deductBalance=0,orderActualMoney=0,payWay=1,siteCode= "en_US"):
+        """下单，
         """
         self.get_data = pcdata.submitOrder
         self.url = base_yaml.get_data("pc","host") + self.get_data["path"]
@@ -85,7 +89,7 @@ class PC:
                     "System-Port": "1",
                     "Flow-Sourcet": "0",
                     "Accept-Language": "en_US",
-                    "Site-Code": "en_US",
+                    "Site-Code": siteCode,
                     # "x-Forwarded-For": "69.212.22.214"
                 }
         self.data = self.get_data["data"]
@@ -199,6 +203,7 @@ class PC:
         self.headers = {
             "Access-Token": token,
             "Content-Type": "application/json;charset=UTF-8",
+            "X-Forwarded-For":"107.155.5.35",
             "User-Id": userId,
             "System-Port": "0",
             "Flow-Sourcet": "0",
@@ -215,11 +220,11 @@ class PC:
         logger.info(response)
         return response
 
-    def getProductId(self, productCode):
+    def getProductId(self, productCode,siteCode):
         """根据productCode返回productId
         """
         admin_token, admin_userId = Admin().adminLogin(username="huanghai", password="dad9e82a80a5f8f6dd71d9375814f620")
-        productMsg = Admin().productListPage(admin_token, admin_userId, productCode)
+        productMsg = Admin().productListPage(admin_token, admin_userId, productCode,siteCode)
         logger.debug(productMsg)
         return productMsg['skuList'][0]['id']
 
