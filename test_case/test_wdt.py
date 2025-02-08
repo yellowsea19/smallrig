@@ -44,6 +44,9 @@ class TestMongoDB(unittest.TestCase):
                                               cursorclass = pymysql.cursors.DictCursor)  # 数据库名称
             self.cursor = self.connection.cursor()
 
+    def tearDown(self):
+        self.cursor.connection.close()
+        self.client.close()  # 关闭 MongoDB 连接
 
 
 
@@ -228,7 +231,7 @@ class TestMongoDB(unittest.TestCase):
         res = requests.post(url=url,headers=headers,json=data)
         print(res.text)
 
-    def test_pull_rma(self,platform_rma_code='TK2501070171'):
+    def test_pull_rma(self,platform_rma_code='TK2412270096'):
         """
         清洗RMA单，如果RMA单对应的订单不存在，则会先清洗订单，然后清洗RMA单
         如果RMA单已经存在，则会先删除，再重新清洗

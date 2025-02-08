@@ -859,7 +859,7 @@ class Order(unittest.TestCase):
         #同步钉钉状态
         # self.do_job(id=311)
 
-    def test_add_order_inventory(self,orderCode='SO25010900011',num=10):
+    def test_add_order_inventory(self,orderCode='SO25011500046',num=10):
         """根据订单号加库存
         """
         res = self.order_detail(orderCode=orderCode)
@@ -881,7 +881,7 @@ class Order(unittest.TestCase):
         # self.create_put_way(documentsNo='WSH2405141422460001')
 
 
-    def test_audit_to_wms(self,orderNo='SO25010600010',orderStatus=7,warehouseName='中国深圳直发仓',expressTypeName='中通线下'):
+    def test_audit_to_wms(self,orderNo='SO25011500044',orderStatus=2,warehouseName='中国深圳直发仓',expressTypeName='中通线下'):
         """订单审核并推送WMS-->发货
         """
         #旺店通在审单前，如果没有跟踪单号，随机生成一个

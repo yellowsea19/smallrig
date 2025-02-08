@@ -188,9 +188,9 @@ if __name__ == "__main__":
     # pull_order_mq(env='test',id='6653fd68681a580cb8fa7aa5',platformId=47)
     # order_compensation(platformId=30,channel_key = "channel_29",startTime='2024-12-14 15:20:05',endTime='2024-12-14 15:40:05',orderSnSources="112-1246426-6900203",env='test')
     #订单清洗
-    # pull_order(env='test',id='677fb81f8f189276e1bb68f9',platformId=48)
+    pull_order(env='uat',id='678e12eebcf08dfafbb3e3d2',platformId=45)
     #RMA单清洗
-    pull_rma_order(env='test', id='677fb9161cf4ed47a8405290', platformId=48)
+    # pull_rma_order(env='test', id='67873436bcf08dfafbb197be', platformId=34)
     #清洗订单费用
     # pull_order_fee(env='test', id='66f0af82146639634a56d374', platformId=31)
     # pull_order_fee(env='test', id='66f0af82146639634a56d374', platformId=31,insertTimeBegin='2024-09-23 08:00:02',insertTimeEnd='2024-09-23 08:00:02')
